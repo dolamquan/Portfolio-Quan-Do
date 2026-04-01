@@ -1,4 +1,4 @@
-import { createBrowserRouter } from 'react-router';
+import { createBrowserRouter, Link } from 'react-router';
 import { Layout } from './components/Layout';
 import { Hero } from './components/Hero';
 import { About } from './pages/AboutPage';
@@ -13,26 +13,31 @@ function NotFound() {
       <div className="text-center">
         <h1 className="text-6xl font-bold text-gray-900 mb-4">404</h1>
         <p className="text-xl text-gray-600 mb-8">Page not found</p>
-        <a href="/" className="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors inline-block">
+        <Link to="/" className="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors inline-block">
           Go Home
-        </a>
+        </Link>
       </div>
     </div>
   );
 }
 
-export const router = createBrowserRouter([
+export const router = createBrowserRouter(
+  [
+    {
+      path: '/',
+      Component: Layout,
+      children: [
+        { index: true, Component: Hero },
+        { path: 'about', Component: About },
+        { path: 'skills', Component: Skills },
+        { path: 'experience', Component: Experience },
+        { path: 'projects', Component: Projects },
+        { path: 'contact', Component: Contact },
+        { path: '*', Component: NotFound }
+      ]
+    }
+  ],
   {
-    path: '/',
-    Component: Layout,
-    children: [
-      { index: true, Component: Hero },
-      { path: 'about', Component: About },
-      { path: 'skills', Component: Skills },
-      { path: 'experience', Component: Experience },
-      { path: 'projects', Component: Projects },
-      { path: 'contact', Component: Contact },
-      { path: '*', Component: NotFound }
-    ]
+    basename: '/Portfolio-Quan-Do'
   }
-]);
+);
