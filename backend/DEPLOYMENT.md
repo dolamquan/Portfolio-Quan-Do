@@ -12,10 +12,12 @@ This backend uses Ollama for both embeddings and chat generation.
 Important:
 - Free PaaS web services usually do not provide enough RAM/CPU for running local Ollama models reliably.
 - If the host does not run an Ollama daemon, requests will fail.
+- You can point this backend to a separate Ollama machine by setting `OLLAMA_HOST`.
 
 You have two practical choices:
 - Run backend + Ollama locally (works now for development).
 - Deploy backend to a VM that supports Docker/system services, then run Ollama there.
+- Deploy backend on Render/Railway and set `OLLAMA_HOST` to a reachable Ollama server URL.
 
 ## Render Blueprint
 

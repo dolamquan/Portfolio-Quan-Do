@@ -16,3 +16,5 @@ services:
         value: llama3.2
       - key: EMBEDDING_MODEL
         value: nomic-embed-text
+      - key: OLLAMA_HOST
+        value: http://127.0.0.1:11434

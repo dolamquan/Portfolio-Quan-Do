@@ -10,6 +10,7 @@ COLLECTION_NAME = os.getenv("COLLECTION_NAME", "quan_portfolio")
 # Ollama models.
 LLM_MODEL = os.getenv("LLM_MODEL", "llama3.2")
 EMBEDDING_MODEL = os.getenv("EMBEDDING_MODEL", "nomic-embed-text")
+OLLAMA_HOST = os.getenv("OLLAMA_HOST", "http://127.0.0.1:11434")
 
 # Retrieval and chunking settings.
 TOP_K = int(os.getenv("TOP_K", "5"))
