@@ -15,12 +15,18 @@ export type ChatResponse = {
   sources: SourceItem[];
 };
 
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL ?? 'http://localhost:8000';
+const API_BASE_URL =
+  import.meta.env.VITE_API_BASE_URL?.trim() ||
+  (import.meta.env.PROD
+    ? 'https://portfolio-quan-do.onrender.com'
+    : 'http://localhost:8000');
+
+const NORMALIZED_API_BASE_URL = API_BASE_URL.replace(/\/+$/, '');
 
 export async function sendChatMessage(
   payload: ChatRequest
 ): Promise<ChatResponse> {
-  const response = await fetch(`${API_BASE_URL}/api/chat`, {
+  const response = await fetch(`${NORMALIZED_API_BASE_URL}/api/chat`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -48,7 +54,7 @@ export async function sendChatMessage(
 
 export async function ingestDocuments(reset = false) {
   const response = await fetch(
-    `${API_BASE_URL}/api/ingest?reset=${String(reset)}`,
+    `${NORMALIZED_API_BASE_URL}/api/ingest?reset=${String(reset)}`,
     {
       method: 'POST',
     }
