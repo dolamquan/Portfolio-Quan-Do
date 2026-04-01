@@ -4,22 +4,12 @@ from langchain_community.vectorstores import Chroma
 from langchain_community.embeddings import OllamaEmbeddings
 from ollama import chat
 
-from app.config import (
-    CHROMA_PATH,
-    COLLECTION_NAME,
-    EMBEDDING_MODEL,
-    LLM_MODEL,
-    OLLAMA_HOST,
-    TOP_K,
-)
+from app.config import CHROMA_PATH, COLLECTION_NAME, EMBEDDING_MODEL, LLM_MODEL, TOP_K
 from app.prompt import PROMPT_TEMPLATE
 
 
 def get_vector_db() -> Chroma:
-    embedding_function = OllamaEmbeddings(
-        model=EMBEDDING_MODEL,
-        base_url=OLLAMA_HOST,
-    )
+    embedding_function = OllamaEmbeddings(model=EMBEDDING_MODEL)
 
     db = Chroma(
         collection_name=COLLECTION_NAME,
@@ -55,7 +45,6 @@ def query_rag(question: str) -> dict[str, Any]:
     )
 
     response = chat(
-        host=OLLAMA_HOST,
         model=LLM_MODEL,
         messages=[
             {

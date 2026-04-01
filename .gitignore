@@ -1,7 +1,7 @@
-node_modules/
-.venv/
-dist/
-.vite/
+frontend/node_modules/
+frontend/.venv/
+frontend/dist/
+frontend/.vite/
 *.log
 Thumbs.db
 .DS_Store
