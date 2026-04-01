@@ -6,6 +6,7 @@ import { Skills } from './pages/SkillsPage';
 import { Experience } from './pages/ExperiencePage';
 import { Projects } from './pages/ProjectsPage';
 import { Contact } from './pages/ContactPage';
+import { Chat } from './pages/ChatPage';
 
 function NotFound() {
   return (
@@ -33,6 +34,7 @@ export const router = createBrowserRouter(
         { path: 'experience', Component: Experience },
         { path: 'projects', Component: Projects },
         { path: 'contact', Component: Contact },
+        { path: 'chat', Component: Chat },
         { path: '*', Component: NotFound }
       ]
     }

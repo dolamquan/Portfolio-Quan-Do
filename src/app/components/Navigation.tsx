@@ -22,7 +22,8 @@ export function Navigation() {
     { label: 'Skills', path: '/skills' },
     { label: 'Experience', path: '/experience' },
     { label: 'Projects', path: '/projects' },
-    { label: 'Contact', path: '/contact' }
+    { label: 'Contact', path: '/contact' },
+    { label: 'Chat With Me', path: '/chat' }
   ];
 
   const isActive = (path: string) => location.pathname === path;
