@@ -5,19 +5,21 @@
 - Render and Railway can host the FastAPI app on free tiers (subject to provider limits and sleep behavior).
 - GitHub Pages cannot host this backend because it only serves static files.
 
-## Ollama Compatibility
+## OpenAI Compatibility
 
-This backend uses Ollama for both embeddings and chat generation.
+This backend uses the OpenAI API for both embeddings and chat generation.
 
 Important:
-- Free PaaS web services usually do not provide enough RAM/CPU for running local Ollama models reliably.
-- If the host does not run an Ollama daemon, requests will fail.
-- You can point this backend to a separate Ollama machine by setting `OLLAMA_HOST`.
+- You do not need to host your own model server.
+- You must provide a valid `OPENAI_API_KEY`.
+- You can optionally point to an OpenAI-compatible endpoint with `OPENAI_BASE_URL`.
 
-You have two practical choices:
-- Run backend + Ollama locally (works now for development).
-- Deploy backend to a VM that supports Docker/system services, then run Ollama there.
-- Deploy backend on Render/Railway and set `OLLAMA_HOST` to a reachable Ollama server URL.
+Recommended environment variables:
+- `OPENAI_API_KEY=<your-secret-key>`
+- `LLM_MODEL=gpt-4o-mini`
+- `EMBEDDING_MODEL=text-embedding-3-small`
+- `OPENAI_BASE_URL=` (optional)
+- `CORS_ORIGINS=http://localhost:5173,http://127.0.0.1:5173,https://dolamquan.github.io`
 
 ## Render Blueprint
 

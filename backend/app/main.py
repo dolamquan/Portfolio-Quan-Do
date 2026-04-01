@@ -2,7 +2,7 @@ from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel, Field
 
-from app.config import EMBEDDING_MODEL, LLM_MODEL
+from app.config import CORS_ORIGINS, EMBEDDING_MODEL, LLM_MODEL
 from app.ingest import ingest_documents
 from app.rag import query_rag
 
@@ -12,10 +12,7 @@ app = FastAPI(title="Quan Portfolio RAG API")
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[
-        "http://localhost:5173",
-        "http://127.0.0.1:5173",
-    ],
+    allow_origins=CORS_ORIGINS,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -48,12 +45,36 @@ class IngestResponse(BaseModel):
 def _format_service_error_message(error: Exception) -> str | None:
     message = str(error)
 
-    # Ollama connection failures often surface as urllib3/HTTPConnectionPool errors.
-    if "localhost" in message and "11434" in message:
+    if "The vector store is empty" in message:
         return (
-            "Cannot connect to Ollama at http://localhost:11434. "
-            "Start Ollama (for example: 'ollama serve') and ensure models "
-            f"'{EMBEDDING_MODEL}' and '{LLM_MODEL}' are available."
+            "No portfolio data has been ingested into the vector store yet. "
+            "Run '/api/ingest?reset=true' before using chat."
+        )
+
+    if "Collection expecting embedding with dimension" in message:
+        return (
+            "Your local Chroma collection was built with a different embedding model. "
+            "Reset and re-ingest the vector store by calling '/api/ingest?reset=true', "
+            "or delete the backend/chroma folder and ingest again."
+        )
+
+    if "OPENAI_API_KEY is not set" in message:
+        return (
+            "OPENAI_API_KEY is not configured. "
+            "Set it in your backend environment before calling ingest or chat."
+        )
+
+    if "Incorrect API key" in message or "401" in message or "authentication" in message.lower():
+        return (
+            "OpenAI authentication failed. "
+            "Check OPENAI_API_KEY and verify the configured models "
+            f"'{EMBEDDING_MODEL}' and '{LLM_MODEL}' are available to your account."
+        )
+
+    if "Connection error" in message or "timed out" in message.lower():
+        return (
+            "The backend could not reach the OpenAI API. "
+            "Check outbound network access and OPENAI_BASE_URL if you configured one."
         )
 
     return None

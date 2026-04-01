@@ -13,8 +13,10 @@ services:
       - key: CORS_ORIGINS
         value: http://localhost:5173,http://127.0.0.1:5173,https://dolamquan.github.io
       - key: LLM_MODEL
-        value: llama3.2
+        value: gpt-4o-mini
       - key: EMBEDDING_MODEL
-        value: nomic-embed-text
-      - key: OLLAMA_HOST
-        value: http://127.0.0.1:11434
+        value: text-embedding-3-small
+      - key: OPENAI_API_KEY
+        sync: false
+      - key: OPENAI_BASE_URL
+        value: 

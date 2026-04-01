@@ -2,8 +2,9 @@ fastapi
 uvicorn[standard]
 langchain
 langchain-community
+langchain-openai
 langchain-text-splitters
 chromadb
+openai
 pypdf
-ollama
 python-multipart

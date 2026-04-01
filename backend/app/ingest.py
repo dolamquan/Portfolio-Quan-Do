@@ -8,7 +8,7 @@ from typing import List
 
 from langchain_core.documents import Document
 from langchain_community.vectorstores import Chroma
-from langchain_community.embeddings import OllamaEmbeddings
+from langchain_openai import OpenAIEmbeddings
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 from langchain_community.document_loaders.pdf import PyPDFDirectoryLoader
 
@@ -16,24 +16,57 @@ from app.config import (
     CHROMA_PATH,
     COLLECTION_NAME,
     EMBEDDING_MODEL,
+    OPENAI_BASE_URL,
     CHUNK_SIZE,
     CHUNK_OVERLAP,
     DATA_DIR,
+    require_openai_api_key,
 )
 
 def load_documents() -> List[Document]:
     """
-    Load all pdf documents from the data directory and return them as a list of Document objects.
+    Load all supported documents from the data directory and return them as a list of Document objects.
     """
 
     if not os.path.exists(DATA_DIR):
         raise FileNotFoundError(f"Data directory '{DATA_DIR}' does not exist.")
 
-    loader = PyPDFDirectoryLoader(DATA_DIR)
-    documents = loader.load()
+    documents: List[Document] = []
+
+    pdf_loader = PyPDFDirectoryLoader(DATA_DIR)
+    pdf_documents = pdf_loader.load()
+    for document in pdf_documents:
+        source = document.metadata.get("source", "")
+        if source:
+            document.metadata.setdefault(
+                "section",
+                os.path.splitext(os.path.basename(source))[0],
+            )
+    documents.extend(pdf_documents)
+
+    for entry in os.listdir(DATA_DIR):
+        file_path = os.path.join(DATA_DIR, entry)
+        if not os.path.isfile(file_path) or not entry.lower().endswith(".txt"):
+            continue
+
+        with open(file_path, "r", encoding="utf-8") as file:
+            text = file.read().strip()
+
+        if not text:
+            continue
+
+        documents.append(
+            Document(
+                page_content=text,
+                metadata={
+                    "source": file_path,
+                    "section": os.path.splitext(entry)[0],
+                },
+            )
+        )
 
     if not documents:
-        raise ValueError(f"No PDF documents found in the '{DATA_DIR}' directory.")
+        raise ValueError(f"No supported documents found in the '{DATA_DIR}' directory.")
     
     return documents
 
@@ -87,9 +120,13 @@ def calculate_chunk_ids(chunks: List[Document]) -> List[Document]:
 
 def get_embedding_function():
     """
-    Create the embedding function using Ollama.
+    Create the embedding function using OpenAI-compatible embeddings.
     """
-    return OllamaEmbeddings(model=EMBEDDING_MODEL)
+    return OpenAIEmbeddings(
+        model=EMBEDDING_MODEL,
+        api_key=require_openai_api_key(),
+        base_url=OPENAI_BASE_URL,
+    )
 
 
 def clear_database():
@@ -144,7 +181,7 @@ def ingest_documents(reset: bool = False) -> int:
         clear_database()
 
     documents = load_documents()
-    print(f"Loaded {len(documents)} pages from PDFs.")
+    print(f"Loaded {len(documents)} documents from data sources.")
 
     chunks = split_documents(documents)
     print(f"Split into {len(chunks)} chunks.")

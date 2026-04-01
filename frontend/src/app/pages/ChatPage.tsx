@@ -92,7 +92,7 @@ export function Chat() {
               <div>
                 <h1 className="text-xl font-bold text-white">Quan&apos;s AI Assistant</h1>
                 <p className="text-sm text-blue-100">
-                  Local RAG chatbot with FastAPI + Ollama
+                  Local RAG chatbot with FastAPI
                 </p>
               </div>
             </div>
