@@ -5,3 +5,9 @@ dist/
 *.log
 Thumbs.db
 .DS_Store
+
+# Python backend artifacts
+backend/.venv/
+backend/**/__pycache__/
+backend/**/*.pyc
+backend/chroma/

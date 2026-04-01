@@ -1,0 +1,5 @@
+Quan has built full-stack projects using React for the frontend and FastAPI for the backend.
+
+Quan has worked on machine learning projects including text classification and gastric cancer histopathology image classification.
+
+Quan is interested in retrieval-augmented generation systems, chatbot backends, and AI applications.

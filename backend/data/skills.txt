@@ -1,0 +1,3 @@
+Quan has experience with Python, FastAPI, React, TypeScript, SQL, machine learning, API development, and full-stack web development.
+
+Quan has also worked on data processing, text classification, and image classification projects.

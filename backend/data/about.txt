@@ -1,0 +1,3 @@
+Quan Do is a Computer Science major interested in backend development, machine learning, climate prediction, and satellite image analysis using machine learning.
+
+Quan enjoys building practical software projects and learning how systems work from frontend to backend.
