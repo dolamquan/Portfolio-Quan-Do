@@ -4,17 +4,18 @@ from pydantic import BaseModel, Field
 
 from app.ingest import ingest_documents
 from app.rag import query_rag
+from app.config import CORS_ORIGINS
 
 
 app = FastAPI(title="Quan Portfolio RAG API")
 
 
+origins = [origin.strip() for origin in CORS_ORIGINS.split(",") if origin.strip()]
+
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[
-        "http://localhost:5173",
-        "http://127.0.0.1:5173",
-    ],
+    allow_origins=origins,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],

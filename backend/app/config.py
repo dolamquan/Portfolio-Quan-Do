@@ -1,15 +1,26 @@
-# Default configuration for the application
-# You can override these settings by providing a config.py file in the same directory with the desired values.
+import os
 
-CHROMA_PATH = "chroma" # Directory where ChromaDB will store its data
-COLLECTION_NAME = "quan_portfolio" # Name of the ChromaDB collection to use for storing and retrieving embeddings
 
-LLM_MODEL = "llama3.2"
-EMBEDDING_MODEL = "nomic-embed-text"
+# Directory where ChromaDB stores persisted vectors.
+CHROMA_PATH = os.getenv("CHROMA_PATH", "chroma")
 
-# Number of top relevant chunks to retrieve from ChromaDB for each query
-TOP_K = 5
-CHUNK_SIZE = 800
-CHUNK_OVERLAP = 80
+# Chroma collection used for the portfolio knowledge base.
+COLLECTION_NAME = os.getenv("COLLECTION_NAME", "quan_portfolio")
 
-DATA_DIR = "data"
+# Ollama models.
+LLM_MODEL = os.getenv("LLM_MODEL", "llama3.2")
+EMBEDDING_MODEL = os.getenv("EMBEDDING_MODEL", "nomic-embed-text")
+
+# Retrieval and chunking settings.
+TOP_K = int(os.getenv("TOP_K", "5"))
+CHUNK_SIZE = int(os.getenv("CHUNK_SIZE", "800"))
+CHUNK_OVERLAP = int(os.getenv("CHUNK_OVERLAP", "80"))
+
+# Source docs folder for ingestion.
+DATA_DIR = os.getenv("DATA_DIR", "data")
+
+# Comma-separated list of allowed CORS origins for frontend clients.
+CORS_ORIGINS = os.getenv(
+	"CORS_ORIGINS",
+	"http://localhost:5173,http://127.0.0.1:5173,https://dolamquan.github.io",
+)
