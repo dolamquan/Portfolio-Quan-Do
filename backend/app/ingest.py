@@ -129,6 +129,15 @@ def get_embedding_function():
     )
 
 
+def get_vector_store_count() -> int:
+    db = Chroma(
+        collection_name=COLLECTION_NAME,
+        persist_directory=CHROMA_PATH,
+        embedding_function=get_embedding_function(),
+    )
+    return db._collection.count()
+
+
 def clear_database():
     """
     Delete the local Chroma database directory.
@@ -190,6 +199,16 @@ def ingest_documents(reset: bool = False) -> int:
 
     added_count = add_to_chroma(chunks)
     return added_count
+
+
+def ensure_documents_ingested() -> int:
+    """
+    Populate the vector store if it is currently empty.
+    """
+    if get_vector_store_count() > 0:
+        return 0
+
+    return ingest_documents(reset=False)
 
 
 if __name__ == "__main__":

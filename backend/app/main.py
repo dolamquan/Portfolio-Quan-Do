@@ -1,13 +1,16 @@
+import logging
+
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel, Field
 
-from app.config import CORS_ORIGINS, EMBEDDING_MODEL, LLM_MODEL
-from app.ingest import ingest_documents
+from app.config import AUTO_INGEST_ON_STARTUP, CORS_ORIGINS, EMBEDDING_MODEL, LLM_MODEL
+from app.ingest import ensure_documents_ingested, ingest_documents
 from app.rag import query_rag
 
 
 app = FastAPI(title="Quan Portfolio RAG API")
+logger = logging.getLogger(__name__)
 
 
 app.add_middleware(
@@ -40,6 +43,19 @@ class IngestResponse(BaseModel):
     success: bool
     count: int
     message: str
+
+
+@app.on_event("startup")
+def auto_ingest_on_startup() -> None:
+    if not AUTO_INGEST_ON_STARTUP:
+        return
+
+    try:
+        added_count = ensure_documents_ingested()
+        if added_count > 0:
+            logger.info("Auto-ingested %s portfolio chunks on startup.", added_count)
+    except Exception as error:
+        logger.warning("Auto-ingest skipped: %s", error)
 
 
 def _format_service_error_message(error: Exception) -> str | None:

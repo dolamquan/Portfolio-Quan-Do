@@ -6,6 +6,13 @@ def _get_optional_env(name: str) -> str | None:
 	return value or None
 
 
+def _get_bool_env(name: str, default: bool) -> bool:
+	value = _get_optional_env(name)
+	if value is None:
+		return default
+	return value.lower() in {"1", "true", "yes", "on"}
+
+
 def require_openai_api_key() -> str:
 	api_key = _get_optional_env("OPENAI_API_KEY")
 	if not api_key:
@@ -16,7 +23,8 @@ def require_openai_api_key() -> str:
 # Default configuration for the application.
 # Environment variables can override all values below.
 
-CHROMA_PATH = os.getenv("CHROMA_PATH", "chroma") # Directory where ChromaDB will store its data
+_default_chroma_path = "/tmp/chroma" if os.getenv("RENDER") == "true" else "chroma"
+CHROMA_PATH = os.getenv("CHROMA_PATH", _default_chroma_path) # Directory where ChromaDB will store its data
 
 LLM_MODEL = os.getenv("LLM_MODEL", "gpt-4o-mini")
 EMBEDDING_MODEL = os.getenv("EMBEDDING_MODEL", "text-embedding-3-small")
@@ -31,6 +39,7 @@ CHUNK_SIZE = int(os.getenv("CHUNK_SIZE", "800"))
 CHUNK_OVERLAP = int(os.getenv("CHUNK_OVERLAP", "80"))
 
 DATA_DIR = os.getenv("DATA_DIR", "data")
+AUTO_INGEST_ON_STARTUP = _get_bool_env("AUTO_INGEST_ON_STARTUP", True)
 
 _default_cors_origins = "http://localhost:5173,http://127.0.0.1:5173,https://dolamquan.github.io"
 CORS_ORIGINS = [origin.strip() for origin in os.getenv("CORS_ORIGINS", _default_cors_origins).split(",") if origin.strip()]
