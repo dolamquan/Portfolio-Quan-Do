@@ -76,29 +76,29 @@ export function Chat() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-100 via-blue-50 to-indigo-100 py-20 px-6 pt-28">
+    <div className="min-h-screen bg-white py-20 px-6 pt-28">
       <div className="max-w-5xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7 }}
-          className="rounded-2xl border border-slate-200 bg-white shadow-2xl overflow-hidden"
+          className="rounded-2xl border border-gray-200 bg-white shadow-2xl overflow-hidden"
         >
-          <div className="bg-gradient-to-r from-blue-700 via-indigo-600 to-fuchsia-600 px-6 py-5">
+          <div className="bg-gray-100 px-6 py-5">
             <div className="flex items-center gap-3">
-              <div className="w-11 h-11 rounded-full bg-white/20 border border-white/30 backdrop-blur-sm flex items-center justify-center">
-                <Bot className="w-5 h-5 text-white" />
+              <div className="w-11 h-11 rounded-full bg-white border border-gray-200 flex items-center justify-center">
+                <Bot className="w-5 h-5 text-gray-700" />
               </div>
               <div>
-                <h1 className="text-xl font-bold text-white">Quan&apos;s AI Assistant</h1>
-                <p className="text-sm text-blue-100">
+                <h1 className="text-xl font-bold text-gray-900">Quan's AI Assistant</h1>
+                <p className="text-sm text-gray-600">
                   Local RAG chatbot with FastAPI
                 </p>
               </div>
             </div>
           </div>
 
-          <div className="min-h-[450px] max-h-[550px] overflow-y-auto bg-slate-50/70 px-6 py-5 space-y-5">
+          <div className="min-h-[450px] max-h-[550px] overflow-y-auto bg-gray-50 px-6 py-5 space-y-5">
             {messages.map((message, index) => {
               const isAssistant = message.role === 'assistant';
 
@@ -108,8 +108,8 @@ export function Chat() {
                   className={`flex items-start gap-3 ${isAssistant ? '' : 'justify-end'}`}
                 >
                   {isAssistant && (
-                    <div className="w-8 h-8 rounded-full bg-gradient-to-br from-blue-600 to-violet-600 flex items-center justify-center flex-shrink-0 mt-1">
-                      <Bot className="w-4 h-4 text-white" />
+                    <div className="w-8 h-8 rounded-full bg-gray-200 flex items-center justify-center flex-shrink-0 mt-1">
+                      <Bot className="w-4 h-4 text-gray-700" />
                     </div>
                   )}
 
@@ -117,8 +117,8 @@ export function Chat() {
                     <div
                       className={`rounded-2xl border px-4 py-3 shadow-sm ${
                         isAssistant
-                          ? 'rounded-tl-md border-slate-200 bg-white text-slate-700'
-                          : 'rounded-tr-md border-blue-200 bg-blue-600 text-white'
+                          ? 'rounded-tl-md border-gray-200 bg-white text-gray-700'
+                          : 'rounded-tr-md border-gray-200 bg-gray-900 text-white'
                       }`}
                     >
                       <p className="leading-relaxed whitespace-pre-wrap">{message.content}</p>
@@ -126,7 +126,7 @@ export function Chat() {
                   </div>
 
                   {!isAssistant && (
-                    <div className="w-8 h-8 rounded-full bg-slate-800 flex items-center justify-center flex-shrink-0 mt-1">
+                    <div className="w-8 h-8 rounded-full bg-gray-900 flex items-center justify-center flex-shrink-0 mt-1">
                       <User className="w-4 h-4 text-white" />
                     </div>
                   )}
@@ -147,23 +147,23 @@ export function Chat() {
             )}
           </div>
 
-          <div className="px-6 py-4 border-t border-slate-200 bg-white">
-            <p className="text-sm font-semibold text-slate-600 mb-3">Suggested questions:</p>
-            <div className="flex flex-wrap gap-2">
-              {suggestedQuestions.map((question) => (
-                <button
-                  key={question}
-                  type="button"
-                  onClick={() => sendMessage(question)}
-                  className="px-3 py-2 text-sm rounded-xl border border-blue-200 bg-blue-50 text-blue-700 hover:bg-blue-100 transition-colors"
-                >
-                  {question}
-                </button>
-              ))}
+            <div className="px-6 py-4 border-t border-gray-200 bg-white">
+              <p className="text-sm font-semibold text-gray-600 mb-3">Suggested questions:</p>
+              <div className="flex flex-wrap gap-2">
+                {suggestedQuestions.map((question) => (
+                  <button
+                    key={question}
+                    type="button"
+                    onClick={() => sendMessage(question)}
+                    className="px-3 py-2 text-sm rounded-xl border border-gray-200 bg-gray-100 text-gray-700 hover:bg-gray-200 transition-colors"
+                  >
+                    {question}
+                  </button>
+                ))}
+              </div>
             </div>
-          </div>
 
-          <div className="px-6 py-4 border-t border-slate-200 bg-slate-50">
+          <div className="px-6 py-4 border-t border-gray-200 bg-gray-50">
             <div className="flex gap-3">
               <input
                 type="text"
@@ -171,13 +171,13 @@ export function Chat() {
                 onChange={(e) => setInput(e.target.value)}
                 onKeyDown={handleKeyDown}
                 placeholder="Ask me anything about Quan..."
-                className="flex-1 rounded-xl border border-slate-300 bg-white px-4 py-3 text-slate-700 placeholder:text-slate-400 outline-none focus:ring-2 focus:ring-blue-300"
+                className="flex-1 rounded-xl border border-gray-300 bg-white px-4 py-3 text-gray-700 placeholder:text-gray-400 outline-none focus:ring-2 focus:ring-gray-400"
               />
               <button
                 type="button"
                 onClick={() => sendMessage()}
                 disabled={loading || !input.trim()}
-                className="inline-flex items-center gap-2 rounded-xl px-5 py-3 bg-gradient-to-r from-blue-500 to-purple-500 text-white font-semibold disabled:opacity-50"
+                className="inline-flex items-center gap-2 rounded-xl px-5 py-3 bg-gray-900 text-white font-semibold disabled:opacity-50"
               >
                 <SendHorizontal className="w-4 h-4" />
                 Send
@@ -190,7 +190,7 @@ export function Chat() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.15 }}
-          className="mt-6 rounded-2xl border border-blue-200 bg-blue-50/70 p-6 text-center"
+          className="mt-6 rounded-2xl border border-gray-200 bg-gray-50 p-6 text-center"
         >
           <p className="text-slate-700 leading-relaxed">
             This chatbot retrieves relevant portfolio chunks from a local vector database before

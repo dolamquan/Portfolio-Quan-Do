@@ -47,7 +47,7 @@ export function Contact() {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 via-blue-50 to-purple-50 py-20 px-6 pt-32">
+    <div className="min-h-screen bg-white py-20 px-6 pt-32">
       <div className="max-w-6xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -55,14 +55,12 @@ export function Contact() {
           transition={{ duration: 0.8 }}
           className="text-center mb-16"
         >
-          <div className="inline-flex items-center gap-2 px-4 py-2 bg-white border border-blue-200 rounded-full mb-6">
-            <MessageSquare className="w-4 h-4 text-blue-600" />
+          <div className="inline-flex items-center gap-2 px-4 py-2 bg-gray-100 border border-gray-200 rounded-full mb-6">
+            <MessageSquare className="w-4 h-4 text-gray-700" />
             <span className="text-sm font-semibold text-gray-700">Get In Touch</span>
           </div>
-          <h1 className="text-5xl md:text-6xl font-bold mb-6">
-            <span className="bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">
-              Let's Connect
-            </span>
+          <h1 className="text-5xl md:text-6xl font-bold mb-6 text-gray-900">
+            Let's Connect
           </h1>
           <p className="text-xl text-gray-600 max-w-2xl mx-auto">
             I'm always open to discussing new opportunities, projects, or collaborations. 
@@ -90,8 +88,8 @@ export function Contact() {
                 transition={{ duration: 0.5, delay: 0.3 + index * 0.1 }}
                 className="group bg-white rounded-2xl p-6 border border-gray-200 shadow-lg hover:shadow-xl transition-all hover:-translate-y-2"
               >
-                <div className={`w-14 h-14 bg-gradient-to-br ${method.gradient} rounded-xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform shadow-lg`}>
-                  <Icon className="w-7 h-7 text-white" />
+                <div className="w-14 h-14 bg-gray-200 rounded-xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform shadow-lg">
+                  <Icon className="w-7 h-7 text-gray-700" />
                 </div>
                 <p className="text-gray-900 font-semibold mb-1">{method.label}</p>
                 <p className="text-gray-600 text-sm break-all">{method.value}</p>
@@ -116,8 +114,8 @@ export function Contact() {
             
             <div className="space-y-4 mb-8">
               <div className="flex items-center gap-3 text-gray-900">
-                <div className="w-10 h-10 bg-gradient-to-br from-blue-100 to-purple-100 rounded-lg flex items-center justify-center">
-                  <MapPin className="w-5 h-5 text-blue-600" />
+                <div className="w-10 h-10 bg-gray-200 rounded-lg flex items-center justify-center">
+                  <MapPin className="w-5 h-5 text-gray-700" />
                 </div>
                 <div>
                   <p className="font-semibold">Location</p>
@@ -126,7 +124,7 @@ export function Contact() {
               </div>
             </div>
 
-            <div className="bg-gradient-to-br from-blue-50 to-purple-50 rounded-xl p-6 border border-blue-200">
+            <div className="bg-gray-100 rounded-xl p-6 border border-gray-200">
               <h3 className="text-xl font-bold text-gray-900 mb-4">Available For</h3>
               <ul className="space-y-3">
                 {[
@@ -137,7 +135,7 @@ export function Contact() {
                   'Mentorship Opportunities'
                 ].map((item, index) => (
                   <li key={index} className="flex items-center gap-3 text-gray-700">
-                    <div className="w-2 h-2 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full"></div>
+                    <div className="w-2 h-2 bg-gray-400 rounded-full"></div>
                     <span>{item}</span>
                   </li>
                 ))}

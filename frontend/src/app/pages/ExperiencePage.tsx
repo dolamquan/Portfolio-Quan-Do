@@ -60,7 +60,7 @@ export function Experience() {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 via-blue-50 to-purple-50 py-20 px-6 pt-32">
+    <div className="min-h-screen bg-white py-20 px-6 pt-32">
       <div className="max-w-6xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -68,10 +68,8 @@ export function Experience() {
           transition={{ duration: 0.8 }}
           className="text-center mb-16"
         >
-          <h1 className="text-5xl md:text-6xl font-bold mb-6">
-            <span className="bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">
-              Experience
-            </span>
+          <h1 className="text-5xl md:text-6xl font-bold mb-6 text-gray-900">
+            Experience
           </h1>
           <p className="text-xl text-gray-600 max-w-2xl mx-auto">
             My professional journey combines technical expertise with a passion for teaching and collaboration
@@ -80,7 +78,7 @@ export function Experience() {
         
         <div className="relative">
           {/* Timeline line */}
-          <div className="hidden md:block absolute left-1/2 transform -translate-x-1/2 h-full w-1 bg-gradient-to-b from-blue-300 via-purple-300 to-pink-300 rounded-full"></div>
+          <div className="hidden md:block absolute left-1/2 transform -translate-x-1/2 h-full w-1 bg-gray-200 rounded-full"></div>
 
           <div className="space-y-12">
             {experiences.map((exp, index) => (
@@ -92,13 +90,13 @@ export function Experience() {
                 className={`relative ${index % 2 === 0 ? 'md:pr-[50%]' : 'md:pl-[50%]'}`}
               >
                 {/* Timeline dot */}
-                <div className="hidden md:block absolute top-8 left-1/2 transform -translate-x-1/2 w-6 h-6 bg-white border-4 border-purple-600 rounded-full z-10"></div>
+                <div className="hidden md:block absolute top-8 left-1/2 transform -translate-x-1/2 w-6 h-6 bg-white border-4 border-gray-400 rounded-full z-10"></div>
 
                 <div className={`bg-white rounded-2xl p-8 shadow-xl hover:shadow-2xl transition-all hover:-translate-y-1 ${index % 2 === 0 ? 'md:mr-8' : 'md:ml-8'}`}>
                   <div className="flex items-start justify-between mb-6">
                     <div className="flex items-start gap-4 flex-1">
-                      <div className={`w-14 h-14 bg-gradient-to-br ${exp.color} rounded-xl flex items-center justify-center flex-shrink-0 shadow-lg`}>
-                        <Briefcase className="w-7 h-7 text-white" />
+                      <div className="w-14 h-14 bg-gray-200 rounded-xl flex items-center justify-center flex-shrink-0 shadow-lg">
+                        <Briefcase className="w-7 h-7 text-gray-700" />
                       </div>
                       <div className="flex-1">
                         <h2 className="text-2xl font-bold text-gray-900 mb-2">
@@ -123,25 +121,25 @@ export function Experience() {
 
                   <div className="mb-6">
                     <h3 className="font-semibold text-gray-900 mb-3 flex items-center gap-2">
-                      <TrendingUp className="w-5 h-5 text-purple-600" />
+                      <TrendingUp className="w-5 h-5 text-gray-500" />
                       Key Responsibilities
                     </h3>
                     <ul className="space-y-2">
                       {exp.description.map((item, i) => (
                         <li key={i} className="text-gray-700 flex items-start gap-3 pl-4">
-                          <span className={`mt-2 w-1.5 h-1.5 bg-gradient-to-r ${exp.color} rounded-full flex-shrink-0`}></span>
+                          <span className="mt-2 w-1.5 h-1.5 bg-gray-400 rounded-full flex-shrink-0"></span>
                           <span>{item}</span>
                         </li>
                       ))}
                     </ul>
                   </div>
 
-                  <div className={`bg-gradient-to-r ${exp.color} rounded-xl p-4`}>
-                    <h3 className="font-semibold text-white mb-3">Achievements</h3>
+                  <div className="bg-gray-100 rounded-xl p-4">
+                    <h3 className="font-semibold text-gray-900 mb-3">Achievements</h3>
                     <div className="grid grid-cols-3 gap-2">
                       {exp.achievements.map((achievement, i) => (
-                        <div key={i} className="bg-white/20 backdrop-blur-sm rounded-lg p-3 text-center">
-                          <p className="text-white text-sm font-medium">{achievement}</p>
+                        <div key={i} className="bg-white border border-gray-200 rounded-lg p-3 text-center">
+                          <p className="text-gray-700 text-sm font-medium">{achievement}</p>
                         </div>
                       ))}
                     </div>
@@ -156,9 +154,9 @@ export function Experience() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.8 }}
-          className="mt-16 bg-gradient-to-br from-blue-600 to-purple-600 rounded-2xl p-8 shadow-xl"
+          className="mt-16 bg-gray-100 rounded-2xl p-8 shadow-xl"
         >
-          <h2 className="text-2xl font-bold text-white mb-6 text-center">
+          <h2 className="text-2xl font-bold text-gray-900 mb-6 text-center">
             What I Bring to the Table
           </h2>
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -168,9 +166,9 @@ export function Experience() {
               { title: 'Collaboration', desc: 'Experience in team environments' },
               { title: 'Problem Solving', desc: 'Analytical mindset with proven results' }
             ].map((item, index) => (
-              <div key={index} className="bg-white/20 backdrop-blur-sm rounded-xl p-6 text-center">
-                <h3 className="font-semibold text-white mb-2">{item.title}</h3>
-                <p className="text-blue-100 text-sm">{item.desc}</p>
+              <div key={index} className="bg-white border border-gray-200 rounded-xl p-6 text-center">
+                <h3 className="font-semibold text-gray-900 mb-2">{item.title}</h3>
+                <p className="text-gray-700 text-sm">{item.desc}</p>
               </div>
             ))}
           </div>

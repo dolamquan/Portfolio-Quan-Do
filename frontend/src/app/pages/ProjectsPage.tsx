@@ -70,14 +70,12 @@ export function Projects() {
           transition={{ duration: 0.8 }}
           className="text-center mb-16"
         >
-          <div className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-blue-50 to-purple-50 border border-blue-200 rounded-full mb-6">
-            <Sparkles className="w-4 h-4 text-blue-600" />
+          <div className="inline-flex items-center gap-2 px-4 py-2 bg-gray-100 border border-gray-200 rounded-full mb-6">
+            <Sparkles className="w-4 h-4 text-gray-700" />
             <span className="text-sm font-semibold text-gray-700">My Work</span>
           </div>
-          <h1 className="text-5xl md:text-6xl font-bold mb-6">
-            <span className="bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">
-              Featured Projects
-            </span>
+          <h1 className="text-5xl md:text-6xl font-bold mb-6 text-gray-900">
+            Featured Projects
           </h1>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
             A collection of projects that showcase my technical skills and problem-solving abilities. 
@@ -94,11 +92,9 @@ export function Projects() {
               transition={{ duration: 0.8, delay: 0.2 + index * 0.1 }}
               className="group bg-white rounded-2xl overflow-hidden border border-gray-200 shadow-lg hover:shadow-2xl transition-all hover:-translate-y-2"
             >
-              {/* Gradient Header */}
-              <div className={`h-2 bg-gradient-to-r ${project.gradient}`}></div>
-              
-              <div className={`bg-gradient-to-br ${project.bgGradient} p-8`}>
-                <h2 className="text-2xl font-bold text-gray-900 mb-4 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-blue-600 group-hover:to-purple-600 transition-all">
+              <div className="h-2 bg-gray-200"></div>
+              <div className="bg-gray-50 p-8">
+                <h2 className="text-2xl font-bold text-gray-900 mb-4">
                   {project.title}
                 </h2>
                 
@@ -108,13 +104,13 @@ export function Projects() {
 
                 <div className="mb-6">
                   <h3 className="text-sm font-semibold text-gray-900 mb-3 flex items-center gap-2">
-                    <Sparkles className="w-4 h-4 text-blue-600" />
+                    <Sparkles className="w-4 h-4 text-gray-700" />
                     Key Highlights
                   </h3>
                   <ul className="space-y-2">
                     {project.highlights.map((highlight, i) => (
                       <li key={i} className="text-sm text-gray-700 flex items-start gap-2 pl-2">
-                        <span className={`mt-1.5 w-1.5 h-1.5 bg-gradient-to-r ${project.gradient} rounded-full flex-shrink-0`}></span>
+                        <span className="mt-1.5 w-1.5 h-1.5 bg-gray-400 rounded-full flex-shrink-0"></span>
                         <span>{highlight}</span>
                       </li>
                     ))}
@@ -135,7 +131,7 @@ export function Projects() {
                 <div className="flex gap-4">
                   <a
                     href={project.github}
-                    className={`flex-1 inline-flex items-center justify-center gap-2 px-4 py-3 bg-gradient-to-r ${project.gradient} text-white rounded-xl font-semibold transition-all hover:scale-105 hover:shadow-lg`}
+                    className="flex-1 inline-flex items-center justify-center gap-2 px-4 py-3 bg-gray-900 text-white rounded-xl font-semibold transition-all hover:scale-105 hover:shadow-lg"
                   >
                     <Github className="w-5 h-5" />
                     View Code
@@ -159,7 +155,7 @@ export function Projects() {
           transition={{ duration: 0.8, delay: 0.8 }}
           className="mt-16 text-center"
         >
-          <div className="bg-gradient-to-br from-blue-50 to-purple-50 border border-blue-200 rounded-2xl p-12">
+          <div className="bg-gray-100 border border-gray-200 rounded-2xl p-12">
             <h2 className="text-3xl font-bold text-gray-900 mb-4">
               Want to see more?
             </h2>
@@ -170,7 +166,7 @@ export function Projects() {
               href="https://github.com/dolamquan"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-xl font-semibold hover:scale-105 transition-all hover:shadow-xl shadow-lg"
+              className="inline-flex items-center gap-2 px-8 py-4 bg-gray-900 text-white rounded-xl font-semibold hover:scale-105 transition-all hover:shadow-xl shadow-lg"
             >
               <Github className="w-5 h-5" />
               Visit GitHub Profile
